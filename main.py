@@ -7,9 +7,6 @@ screen = pg.display.set_mode((1280, 720))
 pg.display.set_caption("Hello World!")
 FPS = pg.time.Clock()
 
-#counter variable
-click_count = 0
-
 # Load image
 samosa = pg.image.load(
     "assets/samosa.png"
@@ -23,11 +20,6 @@ while True:
             pg.quit()
             sys.exit()
 
-    #clicker counting
-    if event.type == pg.MOUSEBUTTONDOWN:
-        if samosa_rect.collidepoint(event.pos):
-            click_count += 1
-
     # Fill background (optional, prevents trails)
     screen.fill((30, 30, 30))
 
@@ -37,5 +29,3 @@ while True:
     # Update display
     pg.display.flip()
     FPS.tick(60)
-
-    
