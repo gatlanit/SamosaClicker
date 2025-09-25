@@ -8,7 +8,7 @@ pg.display.set_caption("SAMOSA CLICKER")
 FPS = pg.time.Clock()
 
 # Counter and multipliers
-samosa_count = 10000
+samosa_count = 100000
 click_multiplier = 1
 
 # Upgrade costs
@@ -22,6 +22,7 @@ auto_clickers = 0
 double_unlocked = False
 triple_unlocked = False
 quad_unlocked = False
+auto_unlocked = False  # New flag to track Auto purchase
 
 # Mini Powerups (unlock after AutoClicker)
 auto_speed_cost = 300
@@ -94,15 +95,16 @@ while True:
         upgrade_buttons["quad"] = rect
         y += 60
 
-    # AutoClicker
-    text = font.render(f"Auto - {auto_clicker_cost}", True, get_color(auto_clicker_cost))
-    rect = text.get_rect(topleft=(sidebar_x + text_padding, y))
-    screen.blit(text, rect)
-    upgrade_buttons["auto"] = rect
-    y += 60
+    # AutoClicker - only show if not purchased
+    if not auto_unlocked:
+        text = font.render(f"Auto - {auto_clicker_cost}", True, get_color(auto_clicker_cost))
+        rect = text.get_rect(topleft=(sidebar_x + text_padding, y))
+        screen.blit(text, rect)
+        upgrade_buttons["auto"] = rect
+        y += 60
 
-    # Mini Powerups
-    if auto_clickers > 0:
+    # Mini Powerups - only if Auto purchased
+    if auto_unlocked:
         text = font.render(f"Faster Auto - {auto_speed_cost}", True, get_color(auto_speed_cost))
         rect = text.get_rect(topleft=(sidebar_x + text_padding, y))
         screen.blit(text, rect)
@@ -150,6 +152,7 @@ while True:
                         samosa_count -= auto_clicker_cost
                         auto_clickers += 1
                         auto_clicker_cost = int(auto_clicker_cost * 1.5)
+                        auto_unlocked = True  # now purchased, remove "Auto" button
                     elif key == "faster" and samosa_count >= auto_speed_cost:
                         samosa_count -= auto_speed_cost
                         auto_interval = max(200, auto_interval - 200)
