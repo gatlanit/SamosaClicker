@@ -63,7 +63,7 @@ while True:
     screen.fill((30, 30, 30))
 
     # Render text (fixed position, does not move)
-    text_surface = font.render(f"Clicks: {click_count}", True, (255, 255, 255))
+    text_surface = font.render(f"Samosa Count: {click_count}", True, (255, 255, 255))
     text_rect = text_surface.get_rect(center=text_pos)
     screen.blit(text_surface, text_rect)
 
