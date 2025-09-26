@@ -181,13 +181,13 @@ while True:
 
     # Mini upgrades
     if auto_unlocked:
-        text = font.render(f"Faster Auto - {auto_speed_cost}", True, get_color(auto_speed_cost))
+        text = font.render(f"Faster Samosa Auto- {auto_speed_cost}", True, get_color(auto_speed_cost))
         rect = text.get_rect(topleft=(sidebar_x + text_padding, y))
         screen.blit(text, rect)
         upgrade_buttons["faster"] = rect
         y += 60
 
-        text = font.render(f"Stronger Auto - {auto_power_cost}", True, get_color(auto_power_cost))
+        text = font.render(f"More Samosa Auto - {auto_power_cost}", True, get_color(auto_power_cost))
         rect = text.get_rect(topleft=(sidebar_x + text_padding, y))
         screen.blit(text, rect)
         upgrade_buttons["stronger"] = rect
